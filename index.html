@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Carteira de Passaporte</title>
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #6a9ae2, #4a6cd4);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      color: #333;
+    }
+
+    .carteira {
+      background: #fff;
+      width: 350px;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Cabeçalho */
+    .carteira h1 {
+      text-align: center;
+      color: #2b4779;
+      margin-bottom: 25px;
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 1.5px;
+    }
+
+    /* Formulário */
+    .campo {
+      margin-bottom: 20px;
+    }
+
+    .campo input[type="text"],
+    .campo input[type="number"] {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #c4c4c4;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+      outline: none;
+      font-weight: 500;
+    }
+
+    .campo input[type="text"]:focus,
+    .campo input[type="number"]:focus {
+      border-color: #4a6cd4;
+      box-shadow: 0 0 8px rgba(74, 108, 212, 0.4);
+    }
+
+    /* Botão */
+    input[type="button"] {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      background-color: #4a6cd4;
+      color: white;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      letter-spacing: 1px;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+    }
+
+    input[type="button"]:hover {
+      background-color: #3653a3;
+    }
+
+    /* Área das informações após confirmar */
+    .info {
+      margin-top: 25px;
+      background: #e3e8ff;
+      padding: 20px 25px;
+      border-radius: 12px;
+      box-shadow: inset 0 0 10px rgba(74, 108, 212, 0.15);
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #2b3e80;
+      line-height: 1.5;
+    }
+
+    /* Mensagem de alerta personalizada */
+    .alerta {
+      color: #d32f2f;
+      font-weight: 600;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="carteira" role="main" aria-label="Carteira de Passaporte">
+    <h1>Carteira de Passaporte</h1>
+
+    <div id="alerta" class="alerta" style="display:none;">Escreva todas as informações, krai!</div>
+
+    <div id="formulario">
+      <div class="campo">
+        <input type="text" id="name" placeholder="Digite seu nome" aria-label="Nome" />
+      </div>
+      <div class="campo">
+        <input type="number" id="idade" placeholder="Indique sua idade" aria-label="Idade" />
+      </div>
+      <div class="campo">
+        <input type="text" id="nacionalidade" placeholder="Digite sua nacionalidade" aria-label="Nacionalidade" />
+      </div>
+      <input type="button" onclick="confirmar()" value="Confirmar" aria-label="Confirmar informações" />
+    </div>
+
+    <div id="info" class="info" style="display:none;">
+      <p id="n1"></p>
+      <p id="i1"></p>
+      <p id="nc1"></p>
+    </div>
+  </div>
+
+  <script>
+    function confirmar() {
+      // pegando elementos
+      const p1 = document.querySelector("#n1");
+      const p2 = document.querySelector("#i1");
+      const p3 = document.querySelector("#nc1");
+      const nm = document.getElementById("name");
+      const id = document.getElementById("idade");
+      const nc = document.getElementById("nacionalidade");
+      const alerta = document.getElementById("alerta");
+      const formulario = document.getElementById("formulario");
+      const info = document.getElementById("info");
+
+      // pegando valores
+      const nome = nm.value.trim();
+      const idade = id.value.trim();
+      const nacionalidade = nc.value.trim();
+
+      // Verificando se foi informado tudo
+      if (nome === "" || idade === "" || nacionalidade === "") {
+        alerta.style.display = "block";
+        return;
+      } else {
+        alerta.style.display = "none";
+      }
+
+      // escrevendo as informações no parágrafo
+      p1.textContent = `Nome: ${nome}`;
+      p2.textContent = `Idade: ${idade} anos`;
+      p3.textContent = `Nacionalidade: ${nacionalidade}`;
+
+      // nao foi eu quem fiz mas e para deixar o projeto mais top
+      formulario.style.display = "none";
+      info.style.display = "block";
+    }
+  </script>
+</body>
+</html>
